@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.iterableWithSize;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 
@@ -18,5 +19,11 @@ public class PostRepositoryIntegrationTest extends AbstractIntegrationTest {
         Post post = postRepository.findOne(1L);
         assertThat(post, is(notNullValue()));
         assertThat(post.getName(), is("Refactoring Ruby applications"));
+    }
+
+    @Test
+    public void findsAllPosts() throws Exception {
+        Iterable<Post> posts = postRepository.findAll();
+        assertThat(posts, is(iterableWithSize(1)));
     }
 }
