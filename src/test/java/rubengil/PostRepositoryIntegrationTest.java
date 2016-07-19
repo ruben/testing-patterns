@@ -3,6 +3,8 @@ package rubengil;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
@@ -27,5 +29,14 @@ public class PostRepositoryIntegrationTest extends AbstractIntegrationTest {
     public void findsAllPosts() throws Exception {
         List<Post> posts = postRepository.findAll();
         assertThat(posts, hasSize(1));
+    }
+
+    @Test
+    public void accessesAllPostsByPage() throws Exception {
+        Page<Post> page = postRepository.findAll(new PageRequest(0, 1));
+        assertThat(page, is(notNullValue()));
+        assertThat(page.isFirst(), is(true));
+        assertThat(page.isLast(), is(true));
+        assertThat(page.getNumberOfElements(), is(1));
     }
 }
