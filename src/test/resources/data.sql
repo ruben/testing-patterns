@@ -1,0 +1,1 @@
+insert into post(id, name) values(1, 'Refactoring Ruby applications')
