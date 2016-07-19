@@ -9,14 +9,14 @@ import org.springframework.data.domain.PageRequest;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 
 public class PostRepositoryIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
-    private PostRepository postRepository;
+    PostRepository postRepository;
 
     @Test
     public void findsPostById() throws Exception {
@@ -28,7 +28,7 @@ public class PostRepositoryIntegrationTest extends AbstractIntegrationTest {
     @Test
     public void findsAllPosts() throws Exception {
         List<Post> posts = postRepository.findAll();
-        assertThat(posts, hasSize(1));
+        assertThat(posts, hasSize(2));
     }
 
     @Test
@@ -36,7 +36,13 @@ public class PostRepositoryIntegrationTest extends AbstractIntegrationTest {
         Page<Post> page = postRepository.findAll(new PageRequest(0, 1));
         assertThat(page, is(notNullValue()));
         assertThat(page.isFirst(), is(true));
-        assertThat(page.isLast(), is(true));
+        assertThat(page.isLast(), is(false));
         assertThat(page.getNumberOfElements(), is(1));
+    }
+
+    @Test
+    public void findsPostsByName() throws Exception {
+        List<Post> posts = postRepository.findByName("Microservices Explained");
+        assertThat(posts, hasItem(hasProperty("name", is("Microservices Explained"))));
     }
 }
