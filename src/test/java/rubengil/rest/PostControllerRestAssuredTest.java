@@ -5,8 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.IntegrationTest;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.boot.test.WebIntegrationTest;
 import rubengil.AbstractTest;
 import rubengil.model.Post;
 import rubengil.model.PostRepository;
@@ -16,8 +15,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
-@WebAppConfiguration
-@IntegrationTest("server.port=0")
+@WebIntegrationTest(randomPort = true)
 public class PostControllerRestAssuredTest extends AbstractTest {
 
     @Autowired
