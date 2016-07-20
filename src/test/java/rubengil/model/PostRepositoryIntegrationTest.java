@@ -1,4 +1,4 @@
-package rubengil;
+package rubengil.model;
 
 
 import org.junit.Test;
@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 
-public class PostRepositoryIntegrationTest extends AbstractIntegrationTest {
+public class PostRepositoryIntegrationTest extends AbstractRepositoryIntegrationTest {
 
     @Autowired
     PostRepository postRepository;

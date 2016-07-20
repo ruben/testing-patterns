@@ -1,0 +1,7 @@
+X Extract base RestController test
+X Extract base Entity test
+
+* Integration test
+* List test
+* Create test
+* Update test

@@ -1,4 +1,4 @@
-package rubengil;
+package rubengil.model;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 
