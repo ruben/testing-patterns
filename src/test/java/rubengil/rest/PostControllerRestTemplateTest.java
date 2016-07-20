@@ -17,7 +17,7 @@ import static org.hamcrest.core.Is.is;
 
 @WebAppConfiguration
 @IntegrationTest("server.port=0")
-public class PostControllerIntegrationTest extends AbstractTest {
+public class PostControllerRestTemplateTest extends AbstractTest {
 
     @Autowired
     private PostRepository postRepository;
@@ -28,7 +28,7 @@ public class PostControllerIntegrationTest extends AbstractTest {
     @Test
     public void getsPost() {
         Post post = postRepository.findOne(1L);
-        ResponseEntity<Post> response = new TestRestTemplate().getForEntity("http://localhost:" + port + "/posts/" + post.getId(), Post.class);
+        ResponseEntity<Post> response = new TestRestTemplate().getForEntity("http://localhost:" + port + "/posts/{id}", Post.class, post.getId());
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         Post responsePost = response.getBody();
         assertThat(responsePost.getId().intValue(), is(1));

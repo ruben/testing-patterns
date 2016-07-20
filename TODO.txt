@@ -1,7 +1,10 @@
 X Extract base RestController test
 X Extract base Entity test
+X Integration test
 
-* Integration test
+* Integration test find by id Rest Assured
+* Integration test find by id Spock
+
 * List test
 * Create test
 * Update test
