@@ -19,10 +19,10 @@ import static org.hamcrest.Matchers.is;
 public class PostControllerRestAssuredTest extends AbstractTest {
 
     @Autowired
-    private PostRepository postRepository;
+    PostRepository postRepository;
 
     @Value("${local.server.port}")
-    private int port;
+    int port;
 
     @Before
     public void setUp() throws Exception {
@@ -32,11 +32,14 @@ public class PostControllerRestAssuredTest extends AbstractTest {
     @Test
     public void getsPost() {
         Post post = postRepository.findOne(1L);
+
+        //@formatter:off
         when().
                 get("/posts/{id}", post.getId()).
-                then().
+        then().
                 statusCode(equalTo(SC_OK)).
                 body("id", is(1)).
                 body("name", is("Refactoring Ruby applications"));
+        //@formatter:on
     }
 }
