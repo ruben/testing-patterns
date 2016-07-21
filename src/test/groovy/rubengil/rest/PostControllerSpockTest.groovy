@@ -15,16 +15,17 @@ class PostControllerSpockTest extends Specification {
     private int port;
 
     def "Gets Post by id"() {
+
         when: "requesting a Post by id"
         def id = 1
-        def client = new RESTClient("http://localhost:8080/rest-service-example/")
-        def response = client.get(path: "http://localhost:${port}/posts/${id}")
+        def client = new RESTClient("http://localhost:${port}/")
+        def response = client.get(path: "posts/${id}")
 
         then: "the right post is expected"
         with(response) {
+            status == 200
             data.id == 1
             data.name == "Refactoring Ruby applications"
-            status == 200
         }
     }
 }
